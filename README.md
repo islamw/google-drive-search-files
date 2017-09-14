@@ -1,7 +1,7 @@
 # google-drive-search-files
 PHP script which search files in your Google drive
 
-## Install
+## Install:
 
 **Turn on the Drive API**
 
@@ -13,3 +13,6 @@ PHP script which search files in your Google drive
 6. Click **OK** to dismiss the resulting dialog.
 7. Click the **download** (Download JSON) button to the right of the client ID.
 8. Move this file to your working directory and rename it *client_secret.json*.
+
+## Run:
+`php findfile.php {filename}`
