@@ -13,6 +13,6 @@ PHP script which search files in your Google drive
 6. Click **OK** to dismiss the resulting dialog.
 7. Click the **download** (Download JSON) button to the right of the client ID.
 8. Move this file to your working directory and rename it *client_secret.json*.
-
-## Run:
-`php findfile.php {filename}`
+9. Install php 7 cli, composer.
+9. `composer install`.
+10. `php findfile.php {filename}`.
