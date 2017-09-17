@@ -108,7 +108,8 @@ function getFileLink(Google_Service_Drive $service, $argv)
     
     foreach (EXTENSIONS as $key => $EXTENSION) {
         $name   = "name='".$argv[1].".".$EXTENSION."'";
-        $result = $service->files->listFiles(['q' => $name, 'fields' => 'files(webViewLink)']);
+        
+        $result = $service->files->listFiles(['q' => $name, 'fields' => 'files(id, webViewLink, permissions)']);
         $files  = $result->getFiles();
         if (empty($files)) {
             if ($lastExtensionKey == $key) {
@@ -116,13 +117,22 @@ function getFileLink(Google_Service_Drive $service, $argv)
             }
             continue;
         } else {
-            return $files[0]->webViewLink;
+            /** @var Google_Service_Drive_DriveFile $file */
+            $file = $files[0];
+            
+            /** @var \Google_Service_Drive_Permission $permission */
+            $permission = new Google_Service_Drive_Permission();
+            $permission->setRole('reader');
+            $permission->setType('anyone');
+            
+            $service->permissions->create($file->id, $permission);
+            
+            return $file->webViewLink;
         }
     }
     
     return false;
 }
-
 
 // Get the API client and construct the service object.
 $client  = getClient();
